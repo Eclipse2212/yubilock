@@ -61,7 +61,7 @@ do
             if [ "$FOUND_AGAIN" -eq 1 ]
             then
 		# Launch KDE screenlock
-		qdbus org.freedesktop.ScreenSaver /ScreenSaver Lock
+		loginctl lock-session
                 INACTIVE=0
             else
                 echo "Found device again."
