@@ -1,0 +1,6 @@
+# specify the usb id from lsusb
+DEVICE=""
+# could be hibernate, suspend, shutdown or reboot
+MODE=hibernate
+# the timeout wating for the device to be re-plugged in before taking action
+TIMEOUT=20

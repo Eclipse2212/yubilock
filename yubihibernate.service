@@ -1,0 +1,8 @@
+[Unit]
+Description=Hibernate your computer as soon as your security token is unplugged
+
+[Service]
+ExecStart=/bin/bash /usr/bin/yubihibernate
+
+[Install]
+WantedBy=multi-user.target
