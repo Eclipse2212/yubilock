@@ -2,7 +2,7 @@
 
 if [ -z "$1" ]
 then
-    source /etc/yubihibernate/device.conf
+    source ./device.conf #/etc/yubihibernate/device.conf
 else
     if [ -f "$1" ]
     then
@@ -46,7 +46,7 @@ do
     then
         if [ $INACTIVE = 1 ]
         then
-            echo "Unplugged. Please re-plug in or hibernating in $TIMEOUT seconds..."
+            echo "Unplugged. Please re-plug in or executing actions in $TIMEOUT seconds..."
             FOUND_AGAIN=1
              for i in `seq 1 $TIMEOUT`;
             do
@@ -60,7 +60,8 @@ do
             done
             if [ "$FOUND_AGAIN" -eq 1 ]
             then
-                systemctl $MODE
+		# Launch KDE screenlock
+		qdbus org.freedesktop.ScreenSaver /ScreenSaver Lock
                 INACTIVE=0
             else
                 echo "Found device again."
