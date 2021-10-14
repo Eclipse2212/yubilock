@@ -2,7 +2,7 @@
 
 if [ -z "$1" ]
 then
-    source ./device.conf #/etc/yubihibernate/device.conf
+    source /etc/yubihibernate/device.conf
 else
     if [ -f "$1" ]
     then
