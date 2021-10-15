@@ -46,7 +46,9 @@ do
     then
         if [ $INACTIVE = 1 ]
         then
-            echo "Unplugged. Please re-plug in or executing actions in $TIMEOUT seconds..."
+	    WARNING_MSG="Key removed. Re-plug in or locking in $TIMEOUT seconds."
+            echo "$WARNING_MSG"
+	    notify-send 'YubiLock' "$WARNING_MSG" -u normal
             FOUND_AGAIN=1
              for i in `seq 1 $TIMEOUT`;
             do
@@ -60,11 +62,13 @@ do
             done
             if [ "$FOUND_AGAIN" -eq 1 ]
             then
-		# Launch KDE screenlock
+		# Launch screenlock through dbus
 		loginctl lock-session
                 INACTIVE=0
             else
-                echo "Found device again."
+		FOUND_MSG="Key online again."
+                echo "$FOUND_MSG"
+		notify-send 'YubiLock' "$FOUND_MSG" -u normal
             fi
         fi
     else
