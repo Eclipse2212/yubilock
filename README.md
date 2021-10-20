@@ -14,15 +14,15 @@ make install
 # add the required data to /etc/yubilock/device.conf
 
 systemctl daemon-reload
-systemctl enable --now yubihibernate.service
+systemctl enable --user yubilock.service
 
 # Uninstall
-systemctl disable --now yubihibernate.service
+systemctl disable --user yubilock.service
 # As root
 make uninstall
 systemctl daemon-reload
 
 # Test a configuration
 cp device.conf.example device.conf
-./yubihibernate.sh device.conf
+./yubilock.sh device.conf
 ```
