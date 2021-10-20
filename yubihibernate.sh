@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Load default config
 if [ -z "$1" ]
 then
     source /etc/yubihibernate/device.conf
@@ -46,11 +47,13 @@ do
     then
         if [ $INACTIVE = 1 ]
         then
-	    WARNING_MSG="Key removed. Re-plug in or locking in $TIMEOUT seconds."
+	        # Warn user
+            WARNING_MSG="Key removed. Re-plug in or locking in $TIMEOUT seconds."
             echo "$WARNING_MSG"
-	    notify-send 'YubiLock' "$WARNING_MSG" -u normal
+	        notify-send 'YubiLock' "$WARNING_MSG" -u normal
+            
             FOUND_AGAIN=1
-             for i in `seq 1 $TIMEOUT`;
+            for i in `seq 1 $TIMEOUT`;
             do
                 check_present
                 if [ "$?" -eq 0 ]
@@ -60,15 +63,17 @@ do
                 fi
                 sleep 1
             done
+            
             if [ "$FOUND_AGAIN" -eq 1 ]
             then
-		# Launch screenlock through dbus
-		loginctl lock-session
+		        # Launch screenlock through dbus
+		        loginctl lock-session
+                echo "Session locked."
                 INACTIVE=0
             else
-		FOUND_MSG="Key online again."
+		        FOUND_MSG="Key online again."
                 echo "$FOUND_MSG"
-		notify-send 'YubiLock' "$FOUND_MSG" -u normal
+		        notify-send 'YubiLock' "$FOUND_MSG" -u normal
             fi
         fi
     else

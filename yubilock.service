@@ -1,0 +1,9 @@
+[Unit]
+Description=Lock your computer as soon as your security token is unplugged
+
+[Service]
+Type=simple
+ExecStart=/bin/sh /usr/bin/yubilock
+
+[Install]
+WantedBy=default.target

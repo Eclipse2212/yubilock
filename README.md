@@ -5,26 +5,24 @@
 
 Lock your computer as soon as your Yubikey is unplugged.
 
-You *must* specify the device used and *can* tweak the mode (hibernate, sleep shutdown ec.) in `/etc/yubilock/device.conf`.
+You *must* specify the device used in `/etc/yubilock/device.conf`.
 
 ```bash
-# install
-# must be root
+# Install
+# As root
 make install
-ykinfo -s # check your device's serial number
-# add the Iserial numberD to /etc/yubicohibernate/device.conf
+# add the required data to /etc/yubilock/device.conf
 
 systemctl daemon-reload
 systemctl enable --now yubihibernate.service
 
-# uninstall
+# Uninstall
 systemctl disable --now yubihibernate.service
-# must be root
+# As root
 make uninstall
 systemctl daemon-reload
 
-# locally test
+# Test a configuration
 cp device.conf.example device.conf
-# now tweak device.conf
 ./yubihibernate.sh device.conf
 ```
