@@ -3,7 +3,7 @@
 # Load default config
 if [ -z "$1" ]
 then
-    source /etc/yubihibernate/device.conf
+    source /etc/yubilock/device.conf
 else
     if [ -f "$1" ]
     then
